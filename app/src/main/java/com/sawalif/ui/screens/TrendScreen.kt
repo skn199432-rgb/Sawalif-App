@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.TrendingUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -20,11 +18,11 @@ import com.sawalif.ui.theme.SurfaceDark
 import com.sawalif.ui.theme.TextGray
 
 val trendPosts = listOf(
-    SimplePost(1, "فهد القحطاني", "@fahad_q", "ما أجمل الفجر في رمضان، سكون وهدوء لا يوصف ✨", 315, 52, "منذ ساعتين"),
-    SimplePost(2, "نورة الشمري", "@noura_sh", "الكتاب الجديد لـ رواية الأرض الطيبة ممتاز جداً، أنهيته في يوم واحد 📚", 203, 37, "منذ ساعة"),
-    SimplePost(3, "أحمد السالم", "@ahmed_s", "الصبر مفتاح الفرج، وكل شيء له وقته المناسب 🌙", 142, 23, "منذ 5 دقائق"),
-    SimplePost(4, "سارة المطيري", "@sara_m", "اليوم جربت مطعم جديد وكان رهيب! أنصح الكل يجربه 🍕", 89, 15, "منذ 12 دقيقة"),
-    SimplePost(5, "خالد العتيبي", "@khalid_a", "من يعرف مكان جيد للكامبينق في المنطقة الشرقية؟ 🏕️", 67, 41, "منذ 30 دقيقة"),
+    SimplePost(1, "فهد القحطاني", "@fahad_q", "ما اجمل الفجر في رمضان، سكون وهدوء لا يوصف", 315, 52, "منذ ساعتين"),
+    SimplePost(2, "نورة الشمري", "@noura_sh", "الكتاب الجديد ممتاز جداً، أنهيته في يوم واحد", 203, 37, "منذ ساعة"),
+    SimplePost(3, "أحمد السالم", "@ahmed_s", "الصبر مفتاح الفرج، وكل شيء له وقته المناسب", 142, 23, "منذ 5 دقائق"),
+    SimplePost(4, "سارة المطيري", "@sara_m", "اليوم جربت مطعم جديد وكان رهيب! أنصح الكل يجربه", 89, 15, "منذ 12 دقيقة"),
+    SimplePost(5, "خالد العتيبي", "@khalid_a", "من يعرف مكان جيد للكامبينق في المنطقة الشرقية؟", 67, 41, "منذ 30 دقيقة"),
 )
 
 @Composable
@@ -40,7 +38,7 @@ fun TrendScreen() {
                 .padding(horizontal = 16.dp, vertical = 12.dp)
         ) {
             Text(
-                text = "الترند 🔥",
+                text = "الترند",
                 color = GoldPrimary,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -81,8 +79,8 @@ fun TrendPostCard(post: SimplePost, rank: Int) {
                 Text(post.content, color = Color(0xFFCCCCCC), fontSize = 14.sp, maxLines = 2)
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Text("${post.likes}", color = TextGray, fontSize = 12.sp)
-                    Text("${post.replies}", color = TextGray, fontSize = 12.sp)
+                    Text("${post.likes} اعجاب", color = TextGray, fontSize = 12.sp)
+                    Text("${post.replies} رد", color = TextGray, fontSize = 12.sp)
                 }
             }
         }
