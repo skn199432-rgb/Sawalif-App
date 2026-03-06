@@ -20,11 +20,11 @@ import com.sawalif.ui.theme.SurfaceDark
 import com.sawalif.ui.theme.TextGray
 
 val trendPosts = listOf(
-    Post(1, "فهد القحطاني", "@fahad_q", "ما أجمل الفجر في رمضان، سكون وهدوء لا يوصف ✨", 315, 52, "منذ ساعتين"),
-    Post(2, "نورة الشمري", "@noura_sh", "الكتاب الجديد لـ رواية 'الأرض الطيبة' ممتاز جداً، أنهيته في يوم واحد 📚", 203, 37, "منذ ساعة"),
-    Post(3, "أحمد السالم", "@ahmed_s", "الصبر مفتاح الفرج، وكل شيء له وقته المناسب 🌙", 142, 23, "منذ 5 دقائق"),
-    Post(4, "سارة المطيري", "@sara_m", "اليوم جربت مطعم جديد وكان رهيب! أنصح الكل يجربه 🍕", 89, 15, "منذ 12 دقيقة"),
-    Post(5, "خالد العتيبي", "@khalid_a", "من يعرف مكان جيد للكامبينق في المنطقة الشرقية؟ 🏕️", 67, 41, "منذ 30 دقيقة"),
+    SimplePost(1, "فهد القحطاني", "@fahad_q", "ما أجمل الفجر في رمضان، سكون وهدوء لا يوصف ✨", 315, 52, "منذ ساعتين"),
+    SimplePost(2, "نورة الشمري", "@noura_sh", "الكتاب الجديد لـ رواية الأرض الطيبة ممتاز جداً، أنهيته في يوم واحد 📚", 203, 37, "منذ ساعة"),
+    SimplePost(3, "أحمد السالم", "@ahmed_s", "الصبر مفتاح الفرج، وكل شيء له وقته المناسب 🌙", 142, 23, "منذ 5 دقائق"),
+    SimplePost(4, "سارة المطيري", "@sara_m", "اليوم جربت مطعم جديد وكان رهيب! أنصح الكل يجربه 🍕", 89, 15, "منذ 12 دقيقة"),
+    SimplePost(5, "خالد العتيبي", "@khalid_a", "من يعرف مكان جيد للكامبينق في المنطقة الشرقية؟ 🏕️", 67, 41, "منذ 30 دقيقة"),
 )
 
 @Composable
@@ -48,7 +48,6 @@ fun TrendScreen() {
             )
         }
         Divider(color = Color(0xFF1A1A2E), thickness = 1.dp)
-
         LazyColumn(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -61,7 +60,7 @@ fun TrendScreen() {
 }
 
 @Composable
-fun TrendPostCard(post: Post, rank: Int) {
+fun TrendPostCard(post: SimplePost, rank: Int) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
@@ -82,8 +81,8 @@ fun TrendPostCard(post: Post, rank: Int) {
                 Text(post.content, color = Color(0xFFCCCCCC), fontSize = 14.sp, maxLines = 2)
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Text("❤️ ${post.likes}", color = TextGray, fontSize = 12.sp)
-                    Text("💬 ${post.replies}", color = TextGray, fontSize = 12.sp)
+                    Text("${post.likes}", color = TextGray, fontSize = 12.sp)
+                    Text("${post.replies}", color = TextGray, fontSize = 12.sp)
                 }
             }
         }
