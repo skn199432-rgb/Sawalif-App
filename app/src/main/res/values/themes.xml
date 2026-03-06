@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Sawalif" parent="android:Theme.Material.Light.NoTitleBar">
+    <style name="Theme.Sawalif" parent="android:Theme.Material.NoTitleBar">
     </style>
 </resources>
