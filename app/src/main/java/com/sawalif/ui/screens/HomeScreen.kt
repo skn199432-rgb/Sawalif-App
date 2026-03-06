@@ -7,10 +7,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.ModeComment
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -35,11 +35,11 @@ data class SimplePost(
 )
 
 val samplePosts = listOf(
-    SimplePost(1, "أحمد السالم", "@ahmed_s", "الصبر مفتاح الفرج، وكل شيء له وقته المناسب 🌙", 142, 23, "منذ 5 دقائق"),
-    SimplePost(2, "سارة المطيري", "@sara_m", "اليوم جربت مطعم جديد وكان رهيب! أنصح الكل يجربه 🍕", 89, 15, "منذ 12 دقيقة"),
-    SimplePost(3, "خالد العتيبي", "@khalid_a", "من يعرف مكان جيد للكامبينق في المنطقة الشرقية؟ 🏕️", 67, 41, "منذ 30 دقيقة"),
-    SimplePost(4, "نورة الشمري", "@noura_sh", "الكتاب الجديد لـ رواية الأرض الطيبة ممتاز جداً، أنهيته في يوم واحد 📚", 203, 37, "منذ ساعة"),
-    SimplePost(5, "فهد القحطاني", "@fahad_q", "ما أجمل الفجر في رمضان، سكون وهدوء لا يوصف ✨", 315, 52, "منذ ساعتين"),
+    SimplePost(1, "أحمد السالم", "@ahmed_s", "الصبر مفتاح الفرج، وكل شيء له وقته المناسب", 142, 23, "منذ 5 دقائق"),
+    SimplePost(2, "سارة المطيري", "@sara_m", "اليوم جربت مطعم جديد وكان رهيب! أنصح الكل يجربه", 89, 15, "منذ 12 دقيقة"),
+    SimplePost(3, "خالد العتيبي", "@khalid_a", "من يعرف مكان جيد للكامبينق في المنطقة الشرقية؟", 67, 41, "منذ 30 دقيقة"),
+    SimplePost(4, "نورة الشمري", "@noura_sh", "الكتاب الجديد ممتاز جداً، أنهيته في يوم واحد", 203, 37, "منذ ساعة"),
+    SimplePost(5, "فهد القحطاني", "@fahad_q", "ما أجمل الفجر في رمضان، سكون وهدوء لا يوصف", 315, 52, "منذ ساعتين"),
 )
 
 @Composable
@@ -188,7 +188,7 @@ fun PostCard(post: SimplePost) {
                     ) {
                         Icon(
                             if (liked) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                            contentDescription = "إعجاب",
+                            contentDescription = "اعجاب",
                             tint = if (liked) Color.Red else TextGray,
                             modifier = Modifier.size(20.dp)
                         )
