@@ -24,7 +24,7 @@ import com.sawalif.ui.theme.GoldPrimary
 import com.sawalif.ui.theme.SurfaceDark
 import com.sawalif.ui.theme.TextGray
 
-data class Post(
+data class SimplePost(
     val id: Int,
     val username: String,
     val handle: String,
@@ -35,11 +35,11 @@ data class Post(
 )
 
 val samplePosts = listOf(
-    Post(1, "أحمد السالم", "@ahmed_s", "الصبر مفتاح الفرج، وكل شيء له وقته المناسب 🌙", 142, 23, "منذ 5 دقائق"),
-    Post(2, "سارة المطيري", "@sara_m", "اليوم جربت مطعم جديد وكان رهيب! أنصح الكل يجربه 🍕", 89, 15, "منذ 12 دقيقة"),
-    Post(3, "خالد العتيبي", "@khalid_a", "من يعرف مكان جيد للكامبينق في المنطقة الشرقية؟ 🏕️", 67, 41, "منذ 30 دقيقة"),
-    Post(4, "نورة الشمري", "@noura_sh", "الكتاب الجديد لـ رواية 'الأرض الطيبة' ممتاز جداً، أنهيته في يوم واحد 📚", 203, 37, "منذ ساعة"),
-    Post(5, "فهد القحطاني", "@fahad_q", "ما أجمل الفجر في رمضان، سكون وهدوء لا يوصف ✨", 315, 52, "منذ ساعتين"),
+    SimplePost(1, "أحمد السالم", "@ahmed_s", "الصبر مفتاح الفرج، وكل شيء له وقته المناسب 🌙", 142, 23, "منذ 5 دقائق"),
+    SimplePost(2, "سارة المطيري", "@sara_m", "اليوم جربت مطعم جديد وكان رهيب! أنصح الكل يجربه 🍕", 89, 15, "منذ 12 دقيقة"),
+    SimplePost(3, "خالد العتيبي", "@khalid_a", "من يعرف مكان جيد للكامبينق في المنطقة الشرقية؟ 🏕️", 67, 41, "منذ 30 دقيقة"),
+    SimplePost(4, "نورة الشمري", "@noura_sh", "الكتاب الجديد لـ رواية الأرض الطيبة ممتاز جداً، أنهيته في يوم واحد 📚", 203, 37, "منذ ساعة"),
+    SimplePost(5, "فهد القحطاني", "@fahad_q", "ما أجمل الفجر في رمضان، سكون وهدوء لا يوصف ✨", 315, 52, "منذ ساعتين"),
 )
 
 @Composable
@@ -50,7 +50,6 @@ fun HomeScreen() {
 
     Box(modifier = Modifier.fillMaxSize().background(Color(0xFF0A0A0F))) {
         Column {
-            // Header
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -65,7 +64,6 @@ fun HomeScreen() {
                 )
             }
             Divider(color = Color(0xFF1A1A2E), thickness = 1.dp)
-
             LazyColumn(
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -76,23 +74,14 @@ fun HomeScreen() {
             }
         }
 
-        // FAB
         FloatingActionButton(
             onClick = { showDialog = true },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(16.dp),
-            containerColor = GoldPrimary,
-            shape = RoundedCornerShape(50)
+            containerColor = GoldPrimary
         ) {
-            Row(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(6.dp)
-            ) {
-                Icon(Icons.Filled.Add, contentDescription = null, tint = Color.Black)
-                Text("ابدأ سالفة", color = Color.Black, fontWeight = FontWeight.Bold)
-            }
+            Icon(Icons.Filled.Add, contentDescription = "منشور جديد", tint = Color.Black)
         }
     }
 
@@ -100,7 +89,7 @@ fun HomeScreen() {
         AlertDialog(
             onDismissRequest = { showDialog = false },
             containerColor = SurfaceDark,
-            title = { Text("سالفة جديدة", color = Color.White, fontWeight = FontWeight.Bold) },
+            title = { Text("سالفة جديدة", color = GoldPrimary, fontWeight = FontWeight.Bold) },
             text = {
                 OutlinedTextField(
                     value = newPostText,
@@ -120,7 +109,7 @@ fun HomeScreen() {
                 Button(
                     onClick = {
                         if (newPostText.isNotBlank()) {
-                            val newPost = Post(
+                            val newPost = SimplePost(
                                 id = posts.size + 1,
                                 username = "أنت",
                                 handle = "@you",
@@ -149,10 +138,9 @@ fun HomeScreen() {
 }
 
 @Composable
-fun PostCard(post: Post) {
+fun PostCard(post: SimplePost) {
     var liked by remember { mutableStateOf(false) }
     var likeCount by remember { mutableStateOf(post.likes) }
-
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
@@ -183,11 +171,9 @@ fun PostCard(post: Post) {
                 Spacer(modifier = Modifier.weight(1f))
                 Text(post.time, color = TextGray, fontSize = 12.sp)
             }
-
             Spacer(modifier = Modifier.height(12.dp))
             Text(post.content, color = Color.White, fontSize = 15.sp, lineHeight = 22.sp)
             Spacer(modifier = Modifier.height(12.dp))
-
             Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
