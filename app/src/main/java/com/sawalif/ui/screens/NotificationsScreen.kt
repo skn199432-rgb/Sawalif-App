@@ -11,7 +11,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.ModeComment
 import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,16 +24,21 @@ import com.sawalif.ui.theme.GoldPrimary
 import com.sawalif.ui.theme.SurfaceDark
 import com.sawalif.ui.theme.TextGray
 
-data class Notification(val icon: ImageVector, val iconColor: Color, val text: String, val time: String)
+data class NotifItem(
+    val id: Int,
+    val username: String,
+    val action: String,
+    val time: String,
+    val icon: ImageVector,
+    val iconColor: Color
+)
 
 val notifications = listOf(
-    Notification(Icons.Filled.Favorite, Color.Red, "أحمد السالم أعجب بسالفتك", "منذ 5 دقائق"),
-    Notification(Icons.Filled.ModeComment, Color(0xFF4FC3F7), "سارة المطيري ردت على سالفتك", "منذ 15 دقيقة"),
-    Notification(Icons.Filled.PersonAdd, GoldPrimary, "خالد العتيبي بدأ يتابعك", "منذ ساعة"),
-    Notification(Icons.Filled.Favorite, Color.Red, "نورة الشمري أعجبت بسالفتك", "منذ ساعتين"),
-    Notification(Icons.Filled.ModeComment, Color(0xFF4FC3F7), "فهد القحطاني ردّ على تعليقك", "منذ 3 ساعات"),
-    Notification(Icons.Filled.Favorite, Color.Red, "محمد الغامدي أعجب بسالفتك", "أمس"),
-    Notification(Icons.Filled.PersonAdd, GoldPrimary, "ريم العنزي بدأت تتابعك", "أمس"),
+    NotifItem(1, "أحمد السالم", "أعجب بسالفتك", "منذ 5 دقائق", Icons.Filled.Favorite, Color.Red),
+    NotifItem(2, "نورة الشمري", "علق على سالفتك", "منذ 15 دقيقة", Icons.Filled.ModeComment, Color(0xFF4A90D9)),
+    NotifItem(3, "خالد العتيبي", "بدأ يتابعك", "منذ ساعة", Icons.Filled.PersonAdd, Color(0xFF2ECC71)),
+    NotifItem(4, "سارة المطيري", "أعجب بسالفتك", "منذ ساعتين", Icons.Filled.Favorite, Color.Red),
+    NotifItem(5, "فهد القحطاني", "علق على سالفتك", "منذ 3 ساعات", Icons.Filled.ModeComment, Color(0xFF4A90D9)),
 )
 
 @Composable
@@ -49,7 +54,7 @@ fun NotificationsScreen() {
                 .padding(horizontal = 16.dp, vertical = 12.dp)
         ) {
             Text(
-                text = "الإشعارات",
+                text = "الاشعارات",
                 color = GoldPrimary,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -57,43 +62,65 @@ fun NotificationsScreen() {
             )
         }
         Divider(color = Color(0xFF1A1A2E), thickness = 1.dp)
-
         LazyColumn(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(notifications) { notif ->
-                NotificationItem(notif)
+                NotifCard(notif = notif)
             }
         }
     }
 }
 
 @Composable
-fun NotificationItem(notif: Notification) {
+fun NotifCard(notif: NotifItem) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = SurfaceDark)
     ) {
         Row(
-            modifier = Modifier.padding(14.dp),
+            modifier = Modifier.padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
                 modifier = Modifier
                     .size(40.dp)
                     .clip(CircleShape)
-                    .background(notif.iconColor.copy(alpha = 0.15f)),
+                    .background(GoldPrimary),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(notif.icon, contentDescription = null, tint = notif.iconColor, modifier = Modifier.size(20.dp))
+                Text(
+                    text = notif.username.first().toString(),
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                )
             }
             Spacer(modifier = Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
-                Text(notif.text, color = Color.White, fontSize = 14.sp)
-                Spacer(modifier = Modifier.height(2.dp))
-                Text(notif.time, color = TextGray, fontSize = 12.sp)
+                Text(
+                    text = notif.username,
+                    color = Color.White,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 14.sp
+                )
+                Text(
+                    text = notif.action,
+                    color = TextGray,
+                    fontSize = 13.sp
+                )
+            }
+            Column(horizontalAlignment = Alignment.End) {
+                Icon(
+                    imageVector = notif.icon,
+                    contentDescription = null,
+                    tint = notif.iconColor,
+                    modifier = Modifier.size(20.dp)
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(notif.time, color = TextGray, fontSize = 11.sp)
             }
         }
     }
